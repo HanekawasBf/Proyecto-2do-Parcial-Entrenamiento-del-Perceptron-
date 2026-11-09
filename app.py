@@ -112,12 +112,13 @@ if "perceptron" in st.session_state:
     # arma una lista de diccionarios, uno por epoca.
     # Cada diccionario se convierte en una fila de la tabla.
     # Se usa n() para mostrar los numeros limpios.
-    filas = [
-        {"Época": e["epoca"], "w1": n(e["w1"]), "w2": n(e["w2"]),
-         "b": n(e["b"]), "Errores": e["errores"]}
-        for e in p.epocas
-    ]
-    st.dataframe(filas, use_container_width=True)
+    
+    # Tabla en formato Markdown
+    tabla = "| Época | w1 | w2 | b | Errores |\n|---|---|---|---|---|\n"
+    for e in p.epocas:
+        tabla += (f"| {e['epoca']} | {n(e['w1'])} | {n(e['w2'])} | "
+                  f"{n(e['b'])} | {e['errores']} |\n")
+    st.markdown(tabla)
 
     # Procedimiento paso a paso
     st.header("3. Procedimiento paso a paso")
